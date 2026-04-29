@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle2, ArrowRight } from 'lucide-react';
+import { useContact } from '../context/ContactContext';
 
 const ServiceModal = ({ isOpen, onClose, service }) => {
+  const { openContact } = useContact();
   if (!service) return null;
 
   return (
@@ -90,17 +92,19 @@ const ServiceModal = ({ isOpen, onClose, service }) => {
               </div>
 
               <div className="mt-10 pt-6 border-t border-gray-100">
-                <a
-                  href="#contact"
-                  onClick={onClose}
-                  className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 text-white font-semibold rounded-full transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-[0_4px_24px_rgba(99,102,241,0.3)]"
+                <button
+                  onClick={() => {
+                    onClose();
+                    openContact();
+                  }}
+                  className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 text-white font-semibold rounded-full transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-[0_4px_24px_rgba(99,102,241,0.3)] cursor-pointer"
                   style={{
                     background: 'linear-gradient(135deg, #6366f1, #06b6d4)',
                   }}
                 >
                   Let's Discuss Your Project
                   <ArrowRight size={20} className="text-white" />
-                </a>
+                </button>
               </div>
             </div>
           </motion.div>

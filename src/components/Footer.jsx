@@ -5,8 +5,10 @@ import { ArrowUpRight, Mail } from 'lucide-react';
 const Instagram = (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>;
 const Tiktok = (props) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" {...props}><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.39 6.39 0 005.4 15.6 6.39 6.39 0 0011.8 22a6.28 6.28 0 006.35-6.19v-5.24a8.31 8.31 0 004.85 1.55v-3.41a4.93 4.93 0 01-3.41-2.02z" /></svg>;
 import { motion } from 'framer-motion';
+import { useContact } from '../context/ContactContext';
 
 export default function Footer() {
+  const { openContact } = useContact();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -43,20 +45,6 @@ export default function Footer() {
                 it.
               </span>
             </motion.h2>
-            <motion.a 
-              href="mailto:inodev@gmail.com"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="group inline-flex items-center gap-4 px-8 py-5 bg-white/5 hover:bg-white hover:text-black rounded-full font-bold text-lg md:text-xl transition-all duration-500 backdrop-blur-md border border-white/10 hover:border-transparent hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]"
-            >
-              <div className="p-2 bg-white/10 group-hover:bg-black/10 rounded-full transition-colors">
-                <Mail size={20} />
-              </div>
-              inodev@gmail.com
-              <ArrowUpRight size={24} className="group-hover:rotate-45 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-500" />
-            </motion.a>
           </div>
 
           {/* Socials & Location */}
@@ -84,13 +72,6 @@ export default function Footer() {
                   </a>
                 ))}
               </div>
-            </div>
-            <div>
-              <p className="text-gray-500 font-bold mb-3 uppercase tracking-[0.2em] text-xs">Location</p>
-              <p className="text-xl font-medium text-white">Boufarik, Algeria</p>
-              <p className="text-gray-500 text-sm mt-1 flex items-center gap-2">
-                Available for remote work
-              </p>
             </div>
           </motion.div>
         </div>

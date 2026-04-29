@@ -1,14 +1,16 @@
 import React from 'react';
 import SplitText from '../components/SplitText';
 import DotField from '../components/DotField';
+import { useContact } from '../context/ContactContext';
 
 const Hero = () => {
+  const { openContact } = useContact();
   const handleAnimationComplete = () => {
     console.log('Animation completed');
   };
 
   return (
-    <section className="relative w-full h-screen bg-white flex items-center justify-center overflow-hidden">
+    <section id="home" className="relative w-full h-screen bg-white flex items-center justify-center overflow-hidden">
       {/* Background DotField */}
       <div className="absolute inset-0 z-0">
         <div style={{ width: '100vw', height: '100%' }}>
@@ -93,16 +95,16 @@ const Hero = () => {
         />
 
         <div className="flex flex-col sm:flex-row gap-4 items-center">
-          <a 
-            href="#contact" 
-            className="pointer-events-auto px-10 py-4 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95"
+          <button 
+            onClick={openContact}
+            className="pointer-events-auto px-10 py-4 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 cursor-pointer"
             style={{
               background: 'linear-gradient(135deg, #6366f1, #06b6d4)',
               boxShadow: '0 4px 24px rgba(99,102,241,0.3)',
             }}
           >
             Let's Build Together →
-          </a>
+          </button>
           <a 
             href="#work" 
             className="pointer-events-auto px-10 py-4 text-black font-semibold rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg active:scale-95 bg-transparent border border-gray-300 hover:border-gray-400 hover:bg-gray-50"

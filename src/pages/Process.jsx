@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Headphones, Lightbulb, PenTool, Rocket, CheckCircle, ArrowUpRight } from 'lucide-react';
+import { useContact } from '../context/ContactContext';
 
 const steps = [
   {
@@ -292,6 +293,7 @@ const MobileTimelineStep = ({ step, index, totalSteps }) => {
 };
 
 const Process = () => {
+  const { openContact } = useContact();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
@@ -378,16 +380,16 @@ const Process = () => {
           className={`text-center mt-12 transition-all duration-1000 ease-out delay-[1200ms] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
         >
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105 active:scale-95"
+          <button
+            onClick={openContact}
+            className="inline-flex items-center gap-2 px-8 py-4 text-white font-semibold rounded-full transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
             style={{
               background: 'linear-gradient(135deg, #6366f1, #06b6d4)',
               boxShadow: '0 4px 24px rgba(99,102,241,0.3)',
             }}
           >
             Start Your Project →
-          </a>
+          </button>
         </div>
       </div>
     </section>

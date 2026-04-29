@@ -48,7 +48,7 @@ const ProjectDetails = () => {
     >
       <div className="max-w-6xl mx-auto">
         <Link 
-          to="/" 
+          to="/#work" 
           className="inline-flex items-center gap-2 text-gray-500 hover:text-black transition-colors mb-8 group"
         >
           <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />

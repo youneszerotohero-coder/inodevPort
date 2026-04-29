@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Plus, Code, ArrowRight } from 'lucide-react';
+import { useContact } from '../context/ContactContext';
 
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
@@ -90,6 +91,7 @@ const ProjectCard = ({ project, index }) => {
 };
 
 const Work = () => {
+  const { openContact } = useContact();
   const [isVisible, setIsVisible] = useState(false);
   const titleRef = useRef(null);
 
@@ -133,13 +135,13 @@ const Work = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white rounded-full font-bold hover:bg-gray-800 transition-all hover:scale-105 active:scale-95"
+          <button
+            onClick={openContact}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-black text-white rounded-full font-bold hover:bg-gray-800 transition-all hover:scale-105 active:scale-95 cursor-pointer"
           >
             See more
             <ArrowRight size={20} />
-          </a>
+          </button>
         </div>
       </div>
     </section>

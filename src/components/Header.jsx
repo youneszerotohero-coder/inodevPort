@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useContact } from '../context/ContactContext';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const { openContact } = useContact();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -11,6 +16,19 @@ const Header = () => {
         }, 600);
         return () => clearTimeout(timer);
     }, []);
+
+    const handleNavClick = (e, href) => {
+        if (location.pathname === '/') {
+            e.preventDefault();
+            const id = href.replace('#', '');
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                window.history.pushState(null, '', href);
+            }
+        }
+        // If not on home page, the default Link behavior will take us to /#id
+    };
 
     return (
         <div className="fixed top-8 z-50 w-full flex justify-center px-4">
@@ -30,7 +48,15 @@ const Header = () => {
                     }}
                     className="shrink-0"
                 >
-                    <img src="inov.png" alt="logo" className="w-10 h-10 rounded-full" />
+                    <Link to="/" onClick={(e) => {
+                        if (location.pathname === '/') {
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            window.history.pushState(null, '', '/');
+                        }
+                    }}>
+                        <img src="inov.png" alt="logo" className="w-10 h-10 rounded-full cursor-pointer" />
+                    </Link>
                 </motion.div>
 
                 {/* Links & CTA Wrapper */}
@@ -47,16 +73,16 @@ const Header = () => {
                             >
                                 <div className="flex gap-8 px-2">
                                     {[
-                                        { name: 'Services', href: '#work' },
-                                        { name: 'Work', href: '#about' },
-                                        { name: 'About', href: '#playground' },
-                                        { name: 'Testimonial', href: '#resource' },
+                                        { name: 'Services', href: '#services' },
+                                        { name: 'Process', href: '#process' },
+                                        { name: 'Projects', href: '#work' },
                                     ].map((link, i) => (
                                         <motion.a
                                             layout
                                             key={link.name}
-                                            href={link.href}
-                                            className="hover:text-gray-300 transition-colors"
+                                            href={`/${link.href}`}
+                                            onClick={(e) => handleNavClick(e, link.href)}
+                                            className="hover:text-gray-300 transition-colors cursor-pointer"
                                             initial={{ y: 20, opacity: 0 }}
                                             animate={{ y: 0, opacity: 1 }}
                                             transition={{ delay: 0.1 + (i * 0.15), duration: 0.5, type: "spring", bounce: 0.3 }}
@@ -75,20 +101,20 @@ const Header = () => {
                                 transition={{ duration: 1.2, type: "spring", bounce: 0.15 }}
                                 className="whitespace-nowrap"
                             >
-                                <motion.a
+                                <motion.button
                                     layout
-                                    href="#contact"
+                                    onClick={openContact}
                                     initial={{ scale: 0.8, opacity: 0 }}
                                     animate={{ scale: 1, opacity: 1 }}
                                     transition={{ delay: 1, duration: 0.5, type: "spring", bounce: 0.4 }}
-                                    className="h-10 inline-flex items-center justify-center gap-2 px-5 text-white font-medium text-[14px] rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(99,102,241,0.4)] shrink-0"
+                                    className="h-10 inline-flex items-center justify-center gap-2 px-5 text-white font-medium text-[14px] rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_15px_rgba(99,102,241,0.4)] shrink-0 cursor-pointer"
                                     style={{
                                         background: 'linear-gradient(135deg, #6366f1, #06b6d4)',
                                     }}
                                 >
                                     Contact
                                     <ArrowRight size={16} className="text-white" />
-                                </motion.a>
+                                </motion.button>
                             </motion.div>
                         </>
                     )}
