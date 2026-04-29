@@ -6,6 +6,7 @@ import ProjectDetails from './pages/ProjectDetails'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import ContactDialog from './components/ContactDialog'
+import ChatWidget from './components/ChatWidget'
 import { ContactProvider } from './context/ContactContext'
 
 const AnimatedRoutes = () => {
@@ -46,6 +47,7 @@ function App() {
           <AnimatedRoutes />
           <Footer />
           <ContactDialog />
+          <ChatWidget />
         </main>
       </Router>
     </ContactProvider>
