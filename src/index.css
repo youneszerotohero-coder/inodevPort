@@ -258,12 +258,14 @@ code {
 
 .chat-widget-shell {
   position: fixed;
+  top: 28px;
   right: 28px;
   bottom: 28px;
   z-index: 120;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  justify-content: flex-end;
 }
 
 .chat-widget-trigger {
@@ -292,10 +294,10 @@ code {
 }
 
 .chat-widget-trigger.is-open {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.92);
   animation: none;
-  box-shadow:
-    0 22px 48px rgba(15, 23, 42, 0.34),
-    0 12px 30px rgba(6, 182, 212, 0.22);
 }
 
 .chat-widget-trigger__halo {
@@ -343,9 +345,10 @@ code {
 .chat-widget-panel {
   position: absolute;
   right: 0;
-  bottom: 96px;
+  top: 0;
+  bottom: 0;
   width: 380px;
-  height: 520px;
+  height: auto;
   display: flex;
   flex-direction: column;
   border-radius: 28px;
@@ -399,6 +402,7 @@ code {
   align-items: center;
   gap: 12px;
   min-width: 0;
+  flex: 1;
 }
 
 .chat-widget-avatar {
@@ -434,6 +438,35 @@ code {
   line-height: 1.2;
   font-weight: 600;
   color: #fff;
+}
+
+.chat-widget-header__close {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 0;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: rgba(241, 245, 249, 0.95);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.chat-widget-header__close:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.chat-widget-header__close svg {
+  width: 18px;
+  height: 18px;
 }
 
 .chat-widget-status {
@@ -645,6 +678,7 @@ code {
 
 @media (max-width: 640px) {
   .chat-widget-shell {
+    top: auto;
     right: 16px;
     bottom: 16px;
   }
@@ -652,16 +686,6 @@ code {
   .chat-widget-trigger {
     width: 62px;
     height: 62px;
-  }
-
-  .chat-widget-trigger.is-open {
-    position: fixed;
-    top: max(16px, env(safe-area-inset-top));
-    right: 16px;
-    bottom: auto;
-    width: 52px;
-    height: 52px;
-    z-index: 122;
   }
 
   .chat-widget-panel {

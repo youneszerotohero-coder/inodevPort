@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const GEMINI_ENDPOINT =
-  'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=AIzaSyAL4Pz3qQeUopwjhvWLecMJjt0NnAyywkk';
+  'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=AIzaSyBP9-lWGmRuhZ7uVqNw2SvbYnPpRA4xd1k';
 
 const SYSTEM_CONTEXT = `You are the website assistant for INODEV, a development agency.
 
@@ -273,15 +273,23 @@ function ChatWidget() {
 
           <header className="chat-widget-header">
             <div className="chat-widget-header__identity">
-              <div className="chat-widget-avatar">
+              {/* <div className="chat-widget-avatar">
                 <img src="/inov.png" alt="INODEV avatar" />
-              </div>
+              </div> */}
               <div>
                 <p className="chat-widget-eyebrow">INODEV</p>
                 <h2 id="chat-widget-title">Ask me anything</h2>
               </div>
             </div>
-            <span className="chat-widget-status">Gemini powered</span>
+            <button
+              type="button"
+              className="chat-widget-header__close"
+              onClick={() => setIsOpen(false)}
+              aria-label="Close chat widget"
+            >
+              <CloseIcon />
+            </button>
+            {/* <span className="chat-widget-status">Gemini powered</span> */}
           </header>
 
           <div className="chat-widget-thread" ref={threadRef}>
@@ -319,7 +327,7 @@ function ChatWidget() {
               value={input}
               onChange={(event) => setInput(event.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask about services, projects, or timelines..."
+              placeholder="Type your message..."
               rows={1}
             />
             <button

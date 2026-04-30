@@ -47,6 +47,7 @@ function App() {
           <AnimatedRoutes />
           <Footer />
           <ContactDialog />
+          <ChatWidget />
         </main>
       </Router>
     </ContactProvider>
