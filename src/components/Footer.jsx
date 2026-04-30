@@ -59,7 +59,7 @@ export default function Footer() {
               <p className="text-gray-500 font-bold mb-5 uppercase tracking-[0.2em] text-xs">Socials</p>
               <div className="flex gap-4 mt-2">
                 {[
-                  { icon: Instagram, href: "https://www.instagram.com/yuzusii" },
+                  { icon: Instagram, href: "https://www.instagram.com/inodev.dz" },
                   { icon: Tiktok, href: "https://www.tiktok.com/@inodev.dz" }
                 ].map((social, idx) => (
                   <a 

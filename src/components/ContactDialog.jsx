@@ -21,11 +21,11 @@ const ContactDialog = () => {
       id: 'email',
       name: 'Email',
       icon: <Mail className="w-[18px] h-[18px]" />,
-      value: 'inodev@gmail.com',
+      value: 'inodevdz@gmail.com',
       label: 'Email',
       gradient: 'from-indigo-500 to-violet-600',
       shadow: 'rgba(99, 102, 241, 0.25)',
-      link: 'mailto:inodev@gmail.com',
+      link: 'mailto:inodevdz@gmail.com',
     },
     {
       id: 'phone',

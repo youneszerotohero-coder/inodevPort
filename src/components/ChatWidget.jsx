@@ -32,9 +32,9 @@ Featured projects:
 Contact details:
 - WhatsApp: 0798119954
 - WhatsApp link: https://wa.me/213798119954
-- Email: inodev@gmail.com
+- Email: inodevdz@gmail.com
 - Phone: +213 798 119 954
-- Instagram: https://www.instagram.com/yuzusii
+- Instagram: https://www.instagram.com/inodev.dz/
 - TikTok: https://www.tiktok.com/@inodev.dz
 
 Response guidance:
