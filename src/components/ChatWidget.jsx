@@ -1,49 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const GEMINI_ENDPOINT =
-  'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=AIzaSyBP9-lWGmRuhZ7uVqNw2SvbYnPpRA4xd1k';
-
-const SYSTEM_CONTEXT = `You are the website assistant for INODEV, a development agency.
-
-Represent the brand as a confident, friendly, modern digital partner speaking in first-person plural when appropriate ("we", "our team").
-
-Core positioning:
-- We build ideas into digital reality.
-- We transform visions into high-performing digital products.
-- We create sleek web, desktop, and mobile apps as well as scalable platforms.
-
-Services:
-- Web sites and modern web applications
-- Mobile app development
-- AI workflow automation, chatbots, agents, predictive analytics, NLP, and custom AI integrations
-
-Process:
-1. Discovery and Listening
-2. Strategy and Proposal
-3. Design and Prototype
-4. Development and Build
-5. Delivery and Launch
-
-Featured projects:
-- E-learning Platform: comprehensive online learning platform with course management, progress tracking, and quizzes. Live URL: https://deltaschool.cloud/
-- Portfolio Website: highly interactive portfolio for developers with animations and seamless transitions. Live URL: https://yuzusii.vercel.app/
-- E-commerce Platform: end-to-end shopping platform with search, recommendations, and inventory management. Live URL: https://pureva-pharma.com/
-
-Contact details:
-- WhatsApp: 0798119954
-- WhatsApp link: https://wa.me/213798119954
-- Email: inodevdz@gmail.com
-- Phone: +213 798 119 954
-- Instagram: https://www.instagram.com/inodev.dz/
-- TikTok: https://www.tiktok.com/@inodev.dz
-
-Response guidance:
-- Answer questions as if helping a potential client understand INODEV.
-- Be concise, warm, and helpful.
-- If asked about pricing or custom timelines, explain that the best next step is to contact us for a tailored quote.
-- If asked something not covered by the portfolio, be transparent and answer conservatively without inventing facts.
-- Encourage contacting INODEV when the user is clearly a good fit.`;
-
 const INITIAL_MESSAGES = [
   {
     role: 'model',
@@ -119,26 +75,6 @@ const SendIcon = ({ className = '' }) => (
   </svg>
 );
 
-const buildContents = (messages) => [
-  { role: 'user', parts: [{ text: SYSTEM_CONTEXT }] },
-  ...messages.map((message) => ({
-    role: message.role,
-    parts: [{ text: message.text }],
-  })),
-];
-
-const extractText = (data) => {
-  const parts = data?.candidates?.[0]?.content?.parts;
-  if (!parts?.length) {
-    return '';
-  }
-
-  return parts
-    .map((part) => part?.text || '')
-    .join('\n')
-    .trim();
-};
-
 function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
@@ -196,13 +132,13 @@ function ChatWidget() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(GEMINI_ENDPOINT, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          contents: buildContents(nextMessages),
+          messages: nextMessages,
         }),
       });
 
@@ -215,7 +151,7 @@ function ChatWidget() {
         throw new Error(message);
       }
 
-      const reply = extractText(data);
+      const reply = data?.reply?.trim();
 
       if (!reply) {
         throw new Error('The assistant returned an empty response.');
@@ -233,7 +169,7 @@ function ChatWidget() {
         ...current,
         {
           role: 'model',
-          text: "I'm having trouble reaching Gemini right now. You can still contact us directly at inodev@gmail.com or on WhatsApp at +213 798 119 954.",
+          text: "I'm having trouble reaching Gemini right now. You can still contact us directly at inodevdz@gmail.com or on WhatsApp at +213 798 119 954.",
         },
       ]);
     } finally {
